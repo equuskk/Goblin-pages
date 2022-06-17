@@ -1,0 +1,33 @@
+<div class="text-center">
+    <h1>Расписание САФУ</h1>
+    <div class="col-lg-6 mx-auto">
+        <form (ngSubmit)="onSubmit()" [formGroup]="checkoutForm" class="form row g-3">
+            <div class="col-lg-5">
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="groupId" formControlName="groupId" min="100000" required="true"
+                           type="number" aria-label="Номер группы">
+                    <label for="groupId">Номер группы</label>
+                    <small *ngIf="checkoutForm.invalid" class="form-text text-danger">
+                        Номер группы должен состоять из 6 цифр
+                    </small>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="form-floating mb-3">
+                    <input class="form-control" formControlName="date" id="date" min="2021-09-01" type="date" aria-label="Дата получения расписания">
+                    <label for="date">Дата</label>
+                    <small class="form-text text-muted">
+                        (если не указана, то с сегодняшнего дня)
+                    </small>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <button [disabled]="checkoutForm.invalid" class="btn btn-primary" type="submit" aria-label="Показать расписание">
+                    Посмотреть
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<hr/>
+<router-outlet></router-outlet>

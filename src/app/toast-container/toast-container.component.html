@@ -1,0 +1,7 @@
+<ngb-toast *ngFor="let toast of toastService.toasts" [autohide]="true" [animation]="true" [ngClass]="toast.style"
+    [delay]="toast.delay || 5000" (hiddden)="toastService.remove(toast)">
+    <h3>{{ toast.header }}</h3>
+    <p *ngFor="let line of toast.body.split('\n')">
+        {{ line }}
+    </p>
+</ngb-toast>

@@ -1,0 +1,58 @@
+<div class="text-center">
+    <div *ngIf="!response" class="spinner-border" style="width: 9rem; height: 9rem;">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<div *ngIf="response">
+    <div *ngIf="response.isFromSite">
+        <ngb-alert type="warning">
+            <b>Внимание!</b> Сайт САФУ работает некорректно - расписание получено на ближайший месяц. Попробуйте позже
+        </ngb-alert>
+    </div>
+    <div *ngIf="this.isFromCache">
+        <ngb-alert type="warning">
+            <b>Внимание!</b> Сервер временно недоступен, поэтому было загружено последнее полученное Вами расписание
+        </ngb-alert>
+    </div>
+    <h4>
+        {{ groupId }} - {{ response.groupName }}
+    </h4>
+    <div class="d-inline-block pb-2" ngbDropdown>
+        <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle type="button">Дополнительно</button>
+        <div aria-labelledby="dropdownBasic1" ngbDropdownMenu>
+            <a [disabled]="!response.icsLink || response.isFromSite" [href]="response.icsLink" class="btn" ngbDropdownItem
+               target="_blank">
+                Скачать файл (.ics)
+            </a>
+            <a [disabled]="!response.webCalLink" [href]="this.sanitize(response.webCalLink)" class="btn" ngbDropdownItem
+               target="_blank">
+                Добавить в календарь</a>
+            <hr/>
+            <button disabled ngbDropdownItem>А больше пока ничего и нет...</button>
+        </div>
+    </div>
+    <ul #nav="ngbNav" class="nav-pills" ngbNav>
+        <li *ngFor="let weeks of response.lessons | keyvalue" ngbNavItem>
+            <a ngbNavLink>
+                {{ weeks.key | weekStartEnd}}
+            </a>
+            <ng-template ngbNavContent>
+                <div class="row">
+                    <div *ngFor="let day of weeks.value | keyvalue" class="col-lg-2">
+                        <div class="mx-1">
+                            <div class="dayofweek text-center">
+                                <b>{{ day.key | date:'EEEE, d MMMM':'+0300':'ru' }}</b>
+                            </div>
+                            <hr class="d-lg-block d-none"/>
+                            <app-lesson *ngFor="let lesson of day.value" [lesson]="lesson" class="lesson-card">
+                            </app-lesson>
+                            <hr class="d-lg-none"/>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </li>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>

@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+/* COLORS */
+.transparent {
+    background: transparent !important;
+}
+
+.white {
+    background: #fff !important;
+}
+
+.yellow {
+    background: #ffa !important;
+}
+
+.green {
+    background: #afa !important;
+}
+
+.blue {
+    background: #BDD6EE !important;
+}
+
+.red {
+    background: #fcc !important;
+}
+
+.orange {
+    background: #fc9 !important;
+}
+
+@media (max-width: 991.98px) {
+    .nav-pills {
+        overflow-x: auto;
+        overflow-y: hidden;
+        flex-wrap: nowrap;
+    }
+}
+
+.lesson-card {
+    font-size: 0.9rem;
+}

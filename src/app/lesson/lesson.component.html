@@ -1,0 +1,43 @@
+<div class="card mb-3 lesson-card" *ngIf="lesson.type">
+    <div class="card-header text-dark text-center {{ lesson | lessonTypeColor }}">
+        <div class="h4">
+            <span class="badge text-dark position-absolute start-0 top-0">
+                {{ lesson.number }}
+            </span>
+            <span class="text-center">
+                {{ lesson.startEndTime }}
+            </span>
+        </div>
+        <small>
+            {{ lesson.type }}
+        </small>
+    </div>
+    <div class="card-body">
+        <p class="text-break">
+            <b>{{ lesson.name }}</b>
+        </p>
+        <small class="card-text text-capitalize">
+            {{ lesson.teacher }}
+        </small>
+        <div *ngIf="lesson.groups">
+            <div class="dropdown-divider"></div>
+            <p class="card-text font-italic">{{ lesson.groups }}</p>
+        </div>
+    </div>
+    <div class="card-footer">
+        <p>
+            <b>ауд. {{ lesson.auditory }}</b>, {{ lesson.address }}
+        </p>
+        <b *ngIf="lesson.link">
+            <a [href]="lesson.link">Ссылка на курс</a>
+        </b>
+    </div>
+</div>
+
+<div class="card mb-3 bg-light timetable_sheet" *ngIf="!lesson.type">
+    <div class="card-header text-dark text-center card-footer">
+        <span class="text-center">
+            {{ lesson.name }}
+        </span>
+    </div>
+</div>
